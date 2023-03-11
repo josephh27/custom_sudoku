@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku</title>
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Potta+One&display=swap" rel="stylesheet">
+    <!-- box icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <!-- nav bar-->
+    <nav>
+        <a href="index.html" class="nav-logo">Sudoku</a>
+        <div class="dark-mode-toggle">
+            <div class="bx bxs-sun"></div>
+            <div class="bx bxs-moon"></div>
+        </div>
+    </nav>
+    
+    <!-- actual content excluding nav bar -->
+    <div class="main">
+        <div class="screen">
+            <!-- start screen -->
+            <div class="start-screen active">
+                <input type="text" placeholder="Your name" id="name-input" maxlength=11>
+                <div class="button" id="mode-switch">
+                    Easy
+                </div>
+                <div class="button" id="continue-game">Continue</div>
+                <div class="button" id="start-new-game">New Game</div>
+            </div>
+            <!-- end of start screen -->
+
+            <!-- in-game screen -->
+            <div class="in-game-screen">
+                <div class="sudoku-grid">
+                    <!-- 81 cells -->
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                </div>
+                <!-- user interface below the grid -->
+                <div class="in-game-info">
+                    <div class="in-game-info-box">
+                        <span id="in-game-name">Unknown</span>
+                    </div>
+                    <div class="in-game-info-box">
+                        <span id="in-game-level">Unknown</span>
+                    </div>
+                </div>
+
+                <div class="in-game-info-box in-game-info-time">
+                    <span id="game-time">07:30</span>
+                    <div class="pause-button">
+                        <i class="bx bx-pause"></i>
+                    </div>
+                </div>
+
+                <div class="numbers">
+                    <div class="numbers">1</div>
+                    <div class="numbers">2</div>
+                    <div class="numbers">3</div>
+                    <div class="numbers">4</div>
+                    <div class="numbers">5</div>
+                    <div class="numbers">6</div>
+                    <div class="numbers">7</div>
+                    <div class="numbers">8</div>
+                    <div class="numbers">9</div>
+                    <div class="delete">X</div>
+                </div>
+                <!-- end of user interface below the grid -->
+            </div>
+            <!-- end of in-game screen -->
+
+            <!-- pause screen -->
+            <div class="pause-screen">
+                <div class="button" id="resume-button">Resume</div>
+                <div class="button new-game-button">New Game</div>
+            </div>
+            <!-- end of pause screen -->
+
+            <!-- result screen -->
+            <div class="result-screen">
+                <div class="congratulate">Completed</div>
+                <div class="info">Time</div>
+                <div id="result-time"></div>
+                <div class="button new-game-button" ></div>
+            </div>
+            <!-- end of result screen -->
+        </div>
+    </div>
+    <!-- end of actual content excluding nav bar -->
+    
+    <script src="information.js"></script>
+    <script src="sudoku.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
+
