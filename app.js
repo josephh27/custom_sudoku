@@ -1,3 +1,10 @@
+/*Fixes: 
+- Need to fix the completion test case
+- Unnecessary use of ids
+
+*/
+
+
 //Toggling between dark and light mode
 document.querySelector('.dark-mode-toggle').addEventListener('click', () => {
     document.body.classList.toggle('dark');
@@ -32,6 +39,7 @@ let seconds = 0;
 let su = undefined;
 let su_answer = undefined;
 
-let
+let selected_cell = -1
+
 
 
