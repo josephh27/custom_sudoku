@@ -57,6 +57,16 @@ const findEmptyPos = (grid, pos) => {
     return false;
 }
 
+const shuffleNumbers = (arr) =>{
+    for (let i = 0; i < arr.length; i++){
+        let randomIndex = Math.floor(Math.random() * arr.length-1);
+        let origValue = arr[i];
+        arr[i] = arr[randomIndex];
+        arr[randomIndex] = origValue;
+    }
+    return arr;
+}
+
 const isFullGrid = (grid) => {
     return grid.every((row) => {
         return row.every((cell) => {
@@ -90,15 +100,104 @@ const sudokuCreate = (grid) => {
             grid[row][col] = CONSTANT.UNASSIGNED;
         }
     })
-    
+    return isFullGrid(grid);
 }
 
+const sudokuCheck = (grid) => {
+
+}
+
+const createRandomIndex = () => Math.floor(Math.random() * CONSTANT.GRID_SIZE);
+
+const removeCells = (grid, level) => {
+    let res = grid;
+    let cellReduce = level
+    while (cellReduce > 0){
+        let row = createRandomIndex();
+        let col = createRandomIndex();
+        while (res[row][col] === 0){
+            row = createRandomIndex();
+            col = createRandomIndex();
+        }
+        res[row][col] = CONSTANT.UNASSIGNED;
+        cellReduce--;
+    }
+    return res
+}
+
+const findNextEmpty = (grid) => {
+    for (let i = 0; i < CONSTANT.GRID_SIZE; i++){
+        for (let j = 0; j < CONSTANT.GRID_SIZE; j++){
+            if (grid[i][j] === 0){
+                return i, j;
+            }
+        }
+    }
+
+    return null, null;
+}
+
+const isValid = (grid, guess, row, col) => {
+    let rowVals = grid[row];
+    if (rowVals.includes(guess)){
+        return false;
+    }
+
+    let colVals = []
+    for (let i = 0; i < CONSTANT.GRID_SIZE; i++){
+        colVals.push(grid[i][col]);
+    }
+    if (colVals.includes(guess)){
+        return false;
+    }
+
+    let rowStart = Math.floor(row/CONSTANT.BOX_SIZE) * 3;
+    let colStart = Math.floor(col/CONSTANT.GRID_SIZE) * 3;
+    for (let i = rowStart; i < rowStart + CONSTANT.BOX_SIZE; i++){
+        for (let j = colStart; j < colStart + CONSTANT.BOX_SIZE; j++){
+            if (grid[i][j] === guess){
+                return false;
+            }
+        }
+    }
+
+    return true;
+
+}
+
+const checkMultipleSolutions = (grid, sols) => {
+    let row, col;
+    [row, col] = findNextEmpty(grid);
+    if (row === null){
+        sols.push("a solution");
+        return true;
+    }
+    for (let guess = 1; guess < CONSTANT.GRID_SIZE+1; i++){
+        if (isValid(grid, guess, row, col)){
+            grid[row][col] = guess;
+        }
+
+        if (checkMultipleSolutions(grid)){
+            return true;
+        }
+        grid[row][col] = 0;
+    }
+    return false
+}
 
 const sudokuGen = (level) => {
     let gridLayout = newGrid(CONSTANT.GRID_SIZE);
     let sudoku = sudokuCreate(gridLayout);
+    let solutions = [];
     if (sudoku){
         let question = removeCells(sudoku, level);
+        checkMultipleSolutions(question);
+        while (solutions.length > 1){
+            question = removeCells(sudoku, level);
+            checkMultipleSolutions(question);
+            solutions = [];
+        }
+
         return {
             original: sudoku,
             question: question

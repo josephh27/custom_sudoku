@@ -1,7 +1,7 @@
 /*Fixes: 
 - Need to fix the completion test case
 - Unnecessary use of ids
-
+- When you input a wrong answer and then reload, the error highlights vanish
 */
 
 
