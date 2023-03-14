@@ -103,9 +103,9 @@ const sudokuCreate = (grid) => {
     return isFullGrid(grid);
 }
 
-const sudokuCheck = (grid) => {
+// const sudokuCheck = (grid) => {
 
-}
+// }
 
 const createRandomIndex = () => Math.floor(Math.random() * CONSTANT.GRID_SIZE);
 
@@ -129,12 +129,12 @@ const findNextEmpty = (grid) => {
     for (let i = 0; i < CONSTANT.GRID_SIZE; i++){
         for (let j = 0; j < CONSTANT.GRID_SIZE; j++){
             if (grid[i][j] === 0){
-                return i, j;
+                return [i, j];
             }
         }
     }
 
-    return null, null;
+    return [null, null];
 }
 
 const isValid = (grid, guess, row, col) => {
@@ -150,7 +150,6 @@ const isValid = (grid, guess, row, col) => {
     if (colVals.includes(guess)){
         return false;
     }
-
     let rowStart = Math.floor(row/CONSTANT.BOX_SIZE) * 3;
     let colStart = Math.floor(col/CONSTANT.GRID_SIZE) * 3;
     for (let i = rowStart; i < rowStart + CONSTANT.BOX_SIZE; i++){
@@ -160,44 +159,15 @@ const isValid = (grid, guess, row, col) => {
             }
         }
     }
-
     return true;
-
 }
 
-const checkMultipleSolutions = (grid, sols) => {
-    let row, col;
-    [row, col] = findNextEmpty(grid);
-    if (row === null){
-        sols.push("a solution");
-        return true;
-    }
-    for (let guess = 1; guess < CONSTANT.GRID_SIZE+1; i++){
-        if (isValid(grid, guess, row, col)){
-            grid[row][col] = guess;
-        }
-
-        if (checkMultipleSolutions(grid)){
-            return true;
-        }
-        grid[row][col] = 0;
-    }
-    return false
-}
 
 const sudokuGen = (level) => {
     let gridLayout = newGrid(CONSTANT.GRID_SIZE);
     let sudoku = sudokuCreate(gridLayout);
-    let solutions = [];
     if (sudoku){
         let question = removeCells(sudoku, level);
-        checkMultipleSolutions(question);
-        while (solutions.length > 1){
-            question = removeCells(sudoku, level);
-            checkMultipleSolutions(question);
-            solutions = [];
-        }
-
         return {
             original: sudoku,
             question: question
@@ -205,3 +175,4 @@ const sudokuGen = (level) => {
     }
     return undefined;
 }
+
