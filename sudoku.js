@@ -103,10 +103,6 @@ const sudokuCreate = (grid) => {
     return isFullGrid(grid);
 }
 
-// const sudokuCheck = (grid) => {
-
-// }
-
 const createRandomIndex = () => Math.floor(Math.random() * CONSTANT.GRID_SIZE);
 
 const removeCells = (grid, level) => {
@@ -137,31 +133,51 @@ const findNextEmpty = (grid) => {
     return [null, null];
 }
 
-const isValid = (grid, guess, row, col) => {
+const isValid = (grid, row, col) => {
+    let occurence = 0;
     let rowVals = grid[row];
-    if (rowVals.includes(guess)){
-        return false;
-    }
+    rowVals.forEach(e => {
+        if (e === grid[row][col]){occurence += 1}
+    })
+    if (occurence >= 2){return false}
+
+    occurence = 0
 
     let colVals = []
     for (let i = 0; i < CONSTANT.GRID_SIZE; i++){
         colVals.push(grid[i][col]);
     }
-    if (colVals.includes(guess)){
-        return false;
-    }
+    colVals.forEach(e => {
+        if (e === grid[row][col]){occurence += 1};
+    })
+    if (occurence >= 2){return false};
+
+    occurence = 0;
+
     let rowStart = Math.floor(row/CONSTANT.BOX_SIZE) * 3;
     let colStart = Math.floor(col/CONSTANT.GRID_SIZE) * 3;
     for (let i = rowStart; i < rowStart + CONSTANT.BOX_SIZE; i++){
         for (let j = colStart; j < colStart + CONSTANT.BOX_SIZE; j++){
-            if (grid[i][j] === guess){
+            if (grid[i][j] === grid[row][col]){
+                occurence += 1;
+            }
+        }
+    }
+    if (occurence >= 2){return false}
+    
+    return true;
+}
+
+const sudokuCheck = (grid) => {
+    for (let i = 0; i < CONSTANT.GRID_SIZE; i++){
+        for (let j = 0; j < CONSTANT.GRID_SIZE; j++){
+            if (grid[i][j] === 0 || (!isValid(grid, i, j))){
                 return false;
             }
         }
     }
     return true;
 }
-
 
 const sudokuGen = (level) => {
     let gridLayout = newGrid(CONSTANT.GRID_SIZE);
