@@ -5,20 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sudoku</title>
+    <meta name="theme-color" content="#fff">
     <!-- google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Potta+One&display=swap" rel="stylesheet">
     <!-- box icons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- css linking -->
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <!-- nav bar-->
     <nav>
-        <a href="index.html" class="nav-logo">Sudoku</a>
-        <div class="dark-mode-toggle">
-            <div class="bx bxs-sun"></div>
-            <div class="bx bxs-moon"></div>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Sudoku</a>
+            <div class="dark-mode-toggle">
+                <div class="bx bxs-sun"></div>
+                <div class="bx bxs-moon"></div>
+            </div>
         </div>
     </nav>
     
@@ -124,7 +129,7 @@
                 </div>
                 <!-- user interface below the grid -->
                 <div class="in-game-info">
-                    <div class="in-game-info-box">
+                    <div class="in-game-info-box ">
                         <span id="in-game-name">Unknown</span>
                     </div>
                     <div class="in-game-info-box">
@@ -133,23 +138,23 @@
                 </div>
 
                 <div class="in-game-info-box in-game-info-time">
-                    <span id="game-time">07:30</span>
-                    <div class="pause-button">
+                    <span id="game-time"></span>
+                    <div id="pause-button">
                         <i class="bx bx-pause"></i>
                     </div>
                 </div>
 
                 <div class="numbers">
-                    <div class="numbers">1</div>
-                    <div class="numbers">2</div>
-                    <div class="numbers">3</div>
-                    <div class="numbers">4</div>
-                    <div class="numbers">5</div>
-                    <div class="numbers">6</div>
-                    <div class="numbers">7</div>
-                    <div class="numbers">8</div>
-                    <div class="numbers">9</div>
-                    <div class="delete">X</div>
+                    <div class="number">1</div>
+                    <div class="number">2</div>
+                    <div class="number">3</div>
+                    <div class="number">4</div>
+                    <div class="number">5</div>
+                    <div class="number">6</div>
+                    <div class="number">7</div>
+                    <div class="number">8</div>
+                    <div class="number">9</div>
+                    <div id="delete-button">X</div>
                 </div>
                 <!-- end of user interface below the grid -->
             </div>
@@ -158,7 +163,7 @@
             <!-- pause screen -->
             <div class="pause-screen">
                 <div class="button" id="resume-button">Resume</div>
-                <div class="button new-game-button">New Game</div>
+                <div class="button another-new-game">New Game</div>
             </div>
             <!-- end of pause screen -->
 
@@ -167,7 +172,7 @@
                 <div class="congratulate">Completed</div>
                 <div class="info">Time</div>
                 <div id="result-time"></div>
-                <div class="button new-game-button" ></div>
+                <div class="button another-new-game" ></div>
             </div>
             <!-- end of result screen -->
         </div>

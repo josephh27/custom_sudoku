@@ -9,10 +9,12 @@ const newGrid = (size) => {
     for (let i = 0; i < Math.pow(size, 2); i++){
         arr[Math.floor(i/size)][i%size] = CONSTANT.UNASSIGNED;
     }
+
+    return arr;
 }
 
 const rowSafe = (grid, row, value) => {
-    for (let col = 0; i < CONSTANT.GRID_SIZE; col++){
+    for (let col = 0; col < CONSTANT.GRID_SIZE; col++){
         if (grid[row][col] === value){
             return false;
         }
@@ -32,16 +34,17 @@ const colSafe = (grid, col, value) => {
 
 const boxSafe = (grid, row, col, value) => {
     for (let row_add = 0; row_add < CONSTANT.BOX_SIZE; row_add++){
-        for (let col_add = 0; col_add < CONSTANT.BOX_SIZE; col_add++)
+        for (let col_add = 0; col_add < CONSTANT.BOX_SIZE; col_add++){
         if (grid[row + row_add][col + col_add] === value){
             return false;
+            }
         }
     }
     return true;
 }
 
 const isSafe = (grid, row, col, value) => {
-    return rowSafe(grid, row, value) && colSafe(grid, col, value) && boxSafe(grid, row, col, value) && value !== CONSTANT.UNASSIGNED;
+    return rowSafe(grid, row, value) && colSafe(grid, col, value) && boxSafe(grid, row - row%3, col - col%3, value) && value !== CONSTANT.UNASSIGNED;
 }
 
 const findEmptyPos = (grid, pos) => {
@@ -59,7 +62,7 @@ const findEmptyPos = (grid, pos) => {
 
 const shuffleNumbers = (arr) =>{
     for (let i = 0; i < arr.length; i++){
-        let randomIndex = Math.floor(Math.random() * arr.length-1);
+        let randomIndex = Math.floor(Math.random() * arr.length);
         let origValue = arr[i];
         arr[i] = arr[randomIndex];
         arr[randomIndex] = origValue;
@@ -82,7 +85,7 @@ const sudokuCreate = (grid) => {
     };
     if (!findEmptyPos(grid, emptyPos)) {return true}
     
-    let numberList = shuffleArray([...CONSTANT.NUMBERS]);
+    let numberList = shuffleNumbers([...CONSTANT.NUMBERS]);
     
     let row = emptyPos.row;
     let col = emptyPos.col;
@@ -99,7 +102,7 @@ const sudokuCreate = (grid) => {
             }
             grid[row][col] = CONSTANT.UNASSIGNED;
         }
-    })
+    });
     return isFullGrid(grid);
 }
 
@@ -181,9 +184,10 @@ const sudokuCheck = (grid) => {
 
 const sudokuGen = (level) => {
     let gridLayout = newGrid(CONSTANT.GRID_SIZE);
+    console.log(gridLayout);
     let sudoku = sudokuCreate(gridLayout);
     if (sudoku){
-        let question = removeCells(sudoku, level);
+        let question = removeCells(gridLayout, level);
         return {
             original: sudoku,
             question: question
