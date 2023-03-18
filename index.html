@@ -9,7 +9,12 @@
     <!-- google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Potta+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rampart+One&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+
     <!-- box icons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <!-- css linking -->
@@ -43,90 +48,109 @@
 
             <!-- in-game screen -->
             <div class="in-game-screen">
+                <div class="in-game-change-game">
+                    <div class="in-game-varieties">
+                        <h2 id="variety-title">Varieties</h2>
+                        <div class="variety">Blinking Sudoku</div>
+                        <div class="variety">Rotting Sudoku</div>
+                        <div class="variety">Letter Sudoku</div>
+                    </div>
+                    <div class="leaderboard">
+                        <div class="in-game-varieties">
+                            <h2 id="top-records">Top Records</h2>
+                            <div record-holder-container></div>
+                            <template id="leaderboard-template">
+                                <div record-holder></div>                      
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="sudoku-grid">
                     <!-- 81 cells -->
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
-                    <div class="grid-cell"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
+                    <div class="grid-cell" tabindex = "1"></div>
                 </div>
+
                 <!-- user interface below the grid -->
                 <div class="in-game-info">
                     <div class="in-game-info-box ">
@@ -135,26 +159,26 @@
                     <div class="in-game-info-box">
                         <span id="in-game-level">Unknown</span>
                     </div>
-                </div>
-
-                <div class="in-game-info-box in-game-info-time">
-                    <span id="game-time"></span>
-                    <div id="pause-button">
-                        <i class="bx bx-pause"></i>
+                
+                    <div class="in-game-info-box in-game-info-time">
+                        <span id="game-time"></span>
+                        <div id="pause-button">
+                            <i class="bx bx-pause"></i>
+                        </div>
                     </div>
-                </div>
-
-                <div class="numbers">
-                    <div class="number">1</div>
-                    <div class="number">2</div>
-                    <div class="number">3</div>
-                    <div class="number">4</div>
-                    <div class="number">5</div>
-                    <div class="number">6</div>
-                    <div class="number">7</div>
-                    <div class="number">8</div>
-                    <div class="number">9</div>
-                    <div id="delete-button">X</div>
+                    
+                    <div class="numbers">
+                        <div class="number">1</div>
+                        <div class="number">2</div>
+                        <div class="number">3</div>
+                        <div class="number">4</div>
+                        <div class="number">5</div>
+                        <div class="number">6</div>
+                        <div class="number">7</div>
+                        <div class="number">8</div>
+                        <div class="number">9</div>
+                        <div id="delete-button">X</div>
+                    </div>
                 </div>
                 <!-- end of user interface below the grid -->
             </div>
@@ -172,7 +196,7 @@
                 <div class="congratulate">Completed</div>
                 <div class="info">Time</div>
                 <div id="result-time"></div>
-                <div class="button another-new-game" ></div>
+                <div class="button another-new-game">New Game</div>
             </div>
             <!-- end of result screen -->
         </div>
@@ -182,6 +206,7 @@
     <script src="information.js"></script>
     <script src="sudoku.js"></script>
     <script src="app.js"></script>
+    <script src="leaderboard.js"> </script>
 </body>
 </html>
 

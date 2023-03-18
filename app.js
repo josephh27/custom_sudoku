@@ -245,12 +245,11 @@ const checkError = (value) => {
             cell.classList.add('cell-err');
             setTimeout(() => {
                 cell.classList.remove('cell-err');
-            }, 500)
+            }, 500);
         }
     }
 
     let index = selectedCell;
-
     let row = Math.floor(index / CONSTANT.GRID_SIZE);
     let col = index % CONSTANT.GRID_SIZE;
 
@@ -260,7 +259,8 @@ const checkError = (value) => {
     for (let i = 0; i < CONSTANT.BOX_SIZE; i++){
         for (let j = 0; j < CONSTANT.BOX_SIZE; j++){
             let cell = cells[9 * (rowStart + i) + (colStart + j)]
-            if (!cell.classList.contains('selected')) {highlightError(cell)}
+            console.log(9 * (rowStart + i) + (colStart + j))
+            if (!cell.classList.contains('selected')) highlightError(cell)
         }
     }
 
@@ -283,7 +283,7 @@ const checkError = (value) => {
     }
 
     step = 1;
-    while (index + step <= (row+1)*9){
+    while (index + step < (row+1)*9){
         highlightError(cells[index+step]);
         step += 1;
     }
@@ -340,6 +340,39 @@ const cellClick = () => {
                 removeBackground();
                 hoverHighlight(index);
             }
+        });
+        e.addEventListener('keydown', (event) => {
+            if (!(e.classList.contains('filled'))){
+                let validKeys = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+                let answer = parseInt(event.key)
+                if (validKeys.includes(answer)){
+                    cells[selectedCell].innerHTML = answer;
+                    cells[selectedCell].setAttribute('data-value', answer);
+
+                    //Filling sudoku questionnaire with the number input
+                    let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
+                    let col = selectedCell % 9;
+                    su_answer[row][col] = answer;
+
+                    //Save game
+                    saveGameInfo();
+                    
+                    //Removing error tags
+                    removeErrorIndex();
+                    checkError(answer);
+                    
+                    cells[selectedCell].classList.add('zoom-in');
+                    setTimeout(() => {
+                        cells[selectedCell].classList.remove('zoom-in');
+                    }, 1000);
+
+                    if (sudokuCheck(su_answer)){
+                        removeGameInfo();
+                        showResult();
+                    };
+                }
+            }
+            
         })
     })
 }
@@ -385,6 +418,10 @@ const numberInputClick = () => {
         })
     })
 }
+
+
+
+
 
 const init = () => {
     const darkMode = JSON.parse(localStorage.getItem('darkmode'));

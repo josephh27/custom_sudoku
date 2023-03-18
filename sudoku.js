@@ -184,7 +184,6 @@ const sudokuCheck = (grid) => {
 
 const sudokuGen = (level) => {
     let gridLayout = newGrid(CONSTANT.GRID_SIZE);
-    console.log(gridLayout);
     let sudoku = sudokuCreate(gridLayout);
     if (sudoku){
         let question = removeCells(gridLayout, level);
