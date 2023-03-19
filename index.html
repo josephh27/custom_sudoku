@@ -48,21 +48,20 @@
 
             <!-- in-game screen -->
             <div class="in-game-screen">
-                <div class="in-game-change-game">
-                    <div class="in-game-varieties">
+                <div class="in-game-extras">
+                    <div class="in-game-change-mode">
                         <h2 id="variety-title">Varieties</h2>
                         <div class="variety">Blinking Sudoku</div>
                         <div class="variety">Rotting Sudoku</div>
                         <div class="variety">Letter Sudoku</div>
                     </div>
                     <div class="leaderboard">
-                        <div class="in-game-varieties">
-                            <h2 id="top-records">Top Records</h2>
-                            <div record-holder-container></div>
-                            <template id="leaderboard-template">
-                                <div record-holder></div>                      
-                            </template>
-                        </div>
+                        <h2 id="top-records">Top Records</h2>
+                        <div record-holder-container id="record-holder-container"></div>
+                        <template id="leaderboard-template">
+                            <div record-holder></div>
+                            <div time-record></div>                      
+                        </template>
                     </div>
                 </div>
 
@@ -205,7 +204,8 @@
     
     <script src="information.js"></script>
     <script src="sudoku.js"></script>
-    <script src="app.js"></script>
+    <script type="module" src="module.js"></script>
+    <script type="module" src="app.js"></script>
     <script src="leaderboard.js"> </script>
 </body>
 </html>

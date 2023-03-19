@@ -1,6 +1,6 @@
 [
-    {"name": "Kaido", "Time": "1:36"},
-    {"name": "Khan", "Time": "1:56"},
-    {"name": "Shiden", "Time": "2:36"},
-    {"name": "Takashi", "Time": "1:06"}
+    {"name": "Kaido", "time": "1:36"},
+    {"name": "Khan", "time": "1:56"},
+    {"name": "Shiden", "time": "2:36"},
+    {"name": "Takashi", "time": "1:06"}
 ]

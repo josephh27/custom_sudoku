@@ -5,6 +5,7 @@
 - Player name is lost/changed when you continue
 */
 
+import { addPlayerLeaderboard } from './module.js';
 
 //Toggling between dark and light mode
 document.querySelector('.dark-mode-toggle').addEventListener('click', () => {
@@ -49,8 +50,8 @@ const getGameInfo = () => JSON.parse(localStorage.getItem('game'));
 const addSpacing = () => {
     let index = 0;
     for (let i = 0; i < Math.pow(CONSTANT.GRID_SIZE, 2); i++){
-        row = Math.floor(i / CONSTANT.GRID_SIZE);
-        col = i % CONSTANT.GRID_SIZE;
+        let row = Math.floor(i / CONSTANT.GRID_SIZE);
+        let col = i % CONSTANT.GRID_SIZE;
         if (row == 2 || row == 5){cells[index].style.marginBottom = '10px';}
         if (col == 2 || col == 5){cells[index].style.marginRight = '10px';}
         index++;
@@ -70,7 +71,7 @@ const startGame = () => {
     setPlayerName(nameDisplay.textContent.trim());
 
     levelDisplay.innerHTML = CONSTANT.MODE_NAMES[levelIndex];
-
+    refreshLeaderboard();
     showTime(seconds);
 
     timer = setInterval(() => {
@@ -151,7 +152,6 @@ document.querySelector('#delete-button').addEventListener('click', () => {
     let row = Math.floor(selectedCell/CONSTANT.GRID_SIZE);
     let col = selectedCell % CONSTANT.GRID_SIZE;
     su_answer[row][col] = 0;
-
     removeErrorIndex();
 })
 
@@ -384,6 +384,12 @@ const removeGameInfo = () => {
 
 const showResult = () => {
     clearInterval(timer);
+    let newRecord = {
+        "name": nameDisplay.textContent,
+        "time": showTime(seconds)
+    }
+    addPlayerLeaderboard(newRecord);
+    refreshLeaderboard();
     resultScreen.classList.add('active');
     resultTime.innerHTML = showTime(seconds);
 }
@@ -418,9 +424,6 @@ const numberInputClick = () => {
         })
     })
 }
-
-
-
 
 
 const init = () => {

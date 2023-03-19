@@ -5,13 +5,23 @@ const recordHolder = document.querySelector("[record-holder]");
 
 let players = [];
 
-fetch("records.json")
-.then(res => res.json())
-.then(data => {
-    console.log(data);
-    players = data.map(player => {
-        const recordsTemplate = recordTemplate.content.cloneNode(true).children[0];
-        recordsTemplate.textContent = player.name;
-        recordHolderContainer.append(recordsTemplate);
+refreshLeaderboard = () => {
+    fetch("records.json")
+    .then(res => res.json())
+    .then(data => {
+        data = data.sort((a, b) => {
+            if (a['time'] > b['time']) return 1;
+            if (a['time'] < b['time']) return -1;
+            return 0;
+        })
+        players = data.map(player => {
+            const recordsTemplate = recordTemplate.content.cloneNode(true).children[0];
+            const timeTemplate = recordTemplate.content.cloneNode(true).children[1];
+            recordsTemplate.textContent = player.name;
+            timeTemplate.textContent = player.time;
+            recordHolderContainer.append(recordsTemplate);
+            recordHolderContainer.append(timeTemplate);
+        })
     })
-})
+}
+    
