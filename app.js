@@ -5,7 +5,7 @@
 - Player name is lost/changed when you continue
 */
 
-import { addPlayerLeaderboard } from './module.js';
+
 
 //Toggling between dark and light mode
 document.querySelector('.dark-mode-toggle').addEventListener('click', () => {
@@ -119,7 +119,7 @@ document.querySelector('#start-new-game').addEventListener('click', () => {
 });
 
 document.querySelector('#continue-game').addEventListener('click', () => {
-    initSudoku();
+    loadSudoku();
     startGame();
 })
 
@@ -194,19 +194,18 @@ const loadSudoku = () =>{
     su = game.su;
     su_answer = su.answer;
     seconds = game.seconds;
-
     timeDisplay.innerHTML = showTime(seconds);
     levelIndex = game.level;
 
-
-    for (let i = 0; i < Math.power(CONSTANT.GRID_SIZE, 2); i++){
+    
+    for (let i = 0; i < Math.pow(CONSTANT.GRID_SIZE, 2); i++){
         let row = Math.floor(i / CONSTANT.GRID_SIZE);
         let col = i % CONSTANT.GRID_SIZE;
 
         cells[i].setAttribute('data-value', su.question[row][col]);
         cells[i].innerHTML = su_answer[row][col] !== 0 ? su_answer[row][col] : '';
-
-        if (su_question[row][col] !== 0){
+       
+        if (su.question[row][col] !== 0){
             cells[i].classList.add('filled');
         }
     }
@@ -220,7 +219,7 @@ const saveGameInfo = () => {
         su: {
             original: su.original,
             question: su.question,
-            answer: su.answer
+            answer: su_answer
         }
     }
     localStorage.setItem('game', JSON.stringify(game))
@@ -259,7 +258,6 @@ const checkError = (value) => {
     for (let i = 0; i < CONSTANT.BOX_SIZE; i++){
         for (let j = 0; j < CONSTANT.BOX_SIZE; j++){
             let cell = cells[9 * (rowStart + i) + (colStart + j)]
-            console.log(9 * (rowStart + i) + (colStart + j))
             if (!cell.classList.contains('selected')) highlightError(cell)
         }
     }
@@ -386,7 +384,7 @@ const showResult = () => {
     clearInterval(timer);
     let newRecord = {
         "name": nameDisplay.textContent,
-        "time": showTime(seconds)
+        "time": showTime(seconds).slice(3)
     }
     addPlayerLeaderboard(newRecord);
     refreshLeaderboard();
