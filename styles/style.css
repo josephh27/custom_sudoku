@@ -227,6 +227,7 @@ nav {
 }
 
 .grid-cell {
+    position: relative;
     height: var(--sudoku-cell-size);
     width: var(--sudoku-cell-size);
     border-radius: var(--border-radius);
@@ -266,25 +267,63 @@ nav {
 
 /* This is for the blinking sudoku */
 .blink {
-    animation: 2s ease-in 0s blink-animation;
-    -webkit-animation: 2s ease-in 0s blink-animation;
+    animation: 3s ease-in 0s blink-animation;
+    -webkit-animation: 3s ease-in 0s blink-animation;
 }
 
 @keyframes blink-animation {
-    to {
-        opacity: 0;
-        background-color: yellow;
-    }
+    12.5% {opacity: 0.75; background-color: yellow;}
+    25% {opacity: 0.5; background-color: yellow;}
+    37.5% {opacity: 0.25; background-color: yellow;}
+    50% {opacity: 0; background-color: yellow;}
+    62.5% {opacity: 0.25; background-color: yellow;}
+    75% {opacity: 0.5; background-color: yellow;}
+    87.5% {opacity: 0.75; background-color: yellow;}
+    100% {opacity: 1; background-color: yellow;}
 }
 
 @-webkit-keyframes blink-animation {
-    to {
-        opacity: 0;
-        background-color: yellow;
-    }
+    12.5% {opacity: 0.75; background-color: yellow;}
+    25% {opacity: 0.5; background-color: yellow;}
+    37.5% {opacity: 0.25; background-color: yellow;}
+    50% {opacity: 0; background-color: yellow;}
+    62.5% {opacity: 0.25; background-color: yellow;}
+    75% {opacity: 0.5; background-color: yellow;}
+    87.5% {opacity: 0.75; background-color: yellow;}
+    100% {opacity: 1; background-color: yellow;}
 }
 
 /* End of blinking sudoku extra feature */
+
+
+/*Extra styles for rotting sudoku*/
+.rotten::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 49%;
+    left: -1%;
+    right: -1%;
+    height: 4px;
+    border-radius: 4px;
+    margin-top: -2px;
+    background: black;
+    transform: scale(0);
+    animation: 1s ease-in 0s expand;
+    z-index: 1;
+}
+
+@keyframes expand{
+    25%{transform: scale(0.25);}
+    50%{transform: scale(0.5);}
+    75%{transform: scale(0.75);}
+    100%{transform: scale(1);}
+}
+
+/* End of rotting sudoku extra feature */
+
+
+
 
 .in-game-change-mode,
 .leaderboard {
@@ -312,6 +351,10 @@ nav {
     color: var(--color-txt);
     border-radius: var(--border-radius);
     padding: 0 20px;
+}
+
+.current-game {
+    background-color: var(--blue);
 }
 
 #record-holder-container {
@@ -482,7 +525,7 @@ nav {
 @media only screen and (max-width: 1020px) {
     :root {
         --nav-size: 50px;
-        --sudoku-cell-size: 65px;
+        --sudoku-cell-size: 45px;
     }
 
     #name-input,
@@ -518,7 +561,7 @@ nav {
 @media only screen and (max-width: 990px) {
     :root {
         --nav-size: 40px;
-        --sudoku-cell-size: 60px;
+        --sudoku-cell-size: 40px;
     }
 }
 

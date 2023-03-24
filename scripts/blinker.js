@@ -56,7 +56,6 @@ const blink = () => {
     cells[randomNine].classList.add('blink');
     cells[randomTen].classList.add('blink');
 
-    console.log(cells[randomSeven]);
     setTimeout(() => {
         cells[randomOne].classList.remove('blink');
         cells[randomTwo].classList.remove('blink');
@@ -68,7 +67,7 @@ const blink = () => {
         cells[randomEight].classList.remove('blink');
         cells[randomNine].classList.remove('blink');
         cells[randomTen].classList.remove('blink');
-    }, 1900);
+    }, 2950);
 }
 
 //Toggling between dark and light mode
@@ -79,7 +78,7 @@ document.querySelector('.dark-mode-toggle').addEventListener('click', () => {
 })
 
 
-const getGameInfo = () => JSON.parse(localStorage.getItem('game'));
+const getGameInfo = () => JSON.parse(localStorage.getItem('blinkingGame'));
 
 const addSpacing = () => {
     let index = 0;
@@ -259,7 +258,7 @@ const saveGameInfo = () => {
             answer: su_answer
         }
     }
-    localStorage.setItem('game', JSON.stringify(game))
+    localStorage.setItem('blinkingGame', JSON.stringify(game))
 }
 
 const removeBackground = () => {

@@ -3,7 +3,7 @@
 - Unnecessary use of ids
 - When you input a wrong answer and then reload, the error highlights vanish
 - Player name is lost/changed when you continue
-- Continue game always appears after reloading, continuing then selecting new game
+- Continue game button always appears after reloading, continuing then selecting new game
 - Fixed the retainment of seconds when continuing game
 */
 
@@ -80,10 +80,32 @@ const startGame = () => {
             seconds += 1;
             timeDisplay.innerHTML = showTime(seconds);
             saveGameInfo();
+            if (seconds%4 === 0){
+                rotCell();
+            }
         }
     }, 1000);
-
 }
+
+const randomInteger = () => {
+    return Math.floor(Math.random() * (80 - 0 + 1)) + 0;
+}
+
+const rotCell = () => {
+    let randomIndex =  randomInteger();
+    cells[randomIndex].classList.add('rotten');
+    cells[randomIndex].innerHTML = '';
+    cells[randomIndex].classList.remove('filled');
+    cells[randomIndex].classList.remove('selected');
+    cells[randomIndex].classList.remove('err');
+    let row = Math.floor(randomIndex / CONSTANT.GRID_SIZE);
+    let col = randomIndex % CONSTANT.GRID_SIZE;
+    su_answer[row][col] = 0;
+    setTimeout(() => {
+        cells[randomIndex].classList.remove('rotten')
+    }, 1000);
+}
+
 
 const clearSudoku = () => {
     for (let i = 0; i < Math.pow(CONSTANT.GRID_SIZE, 2); i++){
@@ -336,7 +358,7 @@ const cellClick = () => {
             if (!(e.classList.contains('filled'))){
                 cells.forEach(e => e.classList.remove('selected'));
                 selectedCell = index;
-                e.classList.remove('err'); 
+                e.classList.remove('err');
                 e.classList.add('selected');
                 removeBackground();
                 hoverHighlight(index);
