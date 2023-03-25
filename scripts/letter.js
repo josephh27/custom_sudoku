@@ -1,10 +1,19 @@
+/*Fixes: 
+- Need to fix the completion test case
+- Unnecessary use of ids
+- When you input a wrong answer and then reload, the error highlights vanish
+- Player name is lost/changed when you continue
+- Continue game always appears after reloading, continuing then selecting new game
+- Fixed the retainment of seconds when continuing game
+*/
+import {sudokuGen, sudokuCheck} from './letter_sudoku.js'
+
 //Toggling between dark and light mode
 document.querySelector('.dark-mode-toggle').addEventListener('click', () => {
     document.body.classList.toggle('dark');
     const isDarkMode = document.body.classList.contains('dark');
     localStorage.setItem('darkmode', isDarkMode);
 })
-
 
 //Initial values
 //Screens
@@ -37,49 +46,7 @@ let su_answer = undefined;
 
 let selectedCell = -1;
 
-const randomInteger = () => {
-    return Math.floor(Math.random() * (80 - 0 + 1)) + 0;
-}
-
-const blink = () => {
-    let randomOne = randomInteger();
-    let randomTwo = randomInteger();
-    let randomThree = randomInteger();
-    let randomFour = randomInteger();
-    let randomFive = randomInteger();
-    let randomSix = randomInteger();
-    let randomSeven = randomInteger();
-    let randomEight = randomInteger();
-    let randomNine = randomInteger();
-    let randomTen = randomInteger();
-
-    cells[randomOne].classList.add('blink');
-    cells[randomTwo].classList.add('blink');
-    cells[randomThree].classList.add('blink');
-    cells[randomFour].classList.add('blink');
-    cells[randomFive].classList.add('blink');
-    cells[randomSix].classList.add('blink');
-    cells[randomSeven].classList.add('blink');
-    cells[randomEight].classList.add('blink');
-    cells[randomNine].classList.add('blink');
-    cells[randomTen].classList.add('blink');
-
-    setTimeout(() => {
-        cells[randomOne].classList.remove('blink');
-        cells[randomTwo].classList.remove('blink');
-        cells[randomThree].classList.remove('blink');
-        cells[randomFour].classList.remove('blink');
-        cells[randomFive].classList.remove('blink');
-        cells[randomSix].classList.remove('blink');
-        cells[randomSeven].classList.remove('blink');
-        cells[randomEight].classList.remove('blink');
-        cells[randomNine].classList.remove('blink');
-        cells[randomTen].classList.remove('blink');
-    }, 2950);
-}
-
-
-const getGameInfo = () => JSON.parse(localStorage.getItem('blinkingGame'));
+const getGameInfo = () => JSON.parse(localStorage.getItem('game'));
 
 const addSpacing = () => {
     let index = 0;
@@ -113,7 +80,6 @@ const startGame = () => {
             seconds += 1;
             timeDisplay.innerHTML = showTime(seconds);
             saveGameInfo();
-            blink();
         }
     }, 1000);
 
@@ -259,7 +225,7 @@ const saveGameInfo = () => {
             answer: su_answer
         }
     }
-    localStorage.setItem('blinkingGame', JSON.stringify(game))
+    localStorage.setItem('game', JSON.stringify(game))
 }
 
 const removeBackground = () => {
@@ -276,7 +242,7 @@ const removeErrorIndex = () => {
 
 const checkError = (value) => {
     const highlightError = (cell) => {
-        if (parseInt(cell.getAttribute('data-value')) === value){
+        if (cell.getAttribute('data-value') === value){
             cell.classList.add('err');
             cell.classList.add('cell-err');
             setTimeout(() => {
@@ -370,7 +336,7 @@ const cellClick = () => {
             if (!(e.classList.contains('filled'))){
                 cells.forEach(e => e.classList.remove('selected'));
                 selectedCell = index;
-                e.classList.remove('err');
+                e.classList.remove('err'); 
                 e.classList.add('selected');
                 removeBackground();
                 hoverHighlight(index);
@@ -378,8 +344,8 @@ const cellClick = () => {
         });
         e.addEventListener('keydown', (event) => {
             if (!(e.classList.contains('filled'))){
-                let validKeys = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-                let answer = parseInt(event.key)
+                let validKeys = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
+                let answer = event.key
                 if (validKeys.includes(answer)){
                     cells[selectedCell].innerHTML = answer;
                     cells[selectedCell].setAttribute('data-value', answer);
@@ -431,22 +397,22 @@ const showResult = () => {
 }
 
 const numberInputClick = () => {
-    numbersInput.forEach((e, index) => {
-        e.addEventListener('click', () => {
-            cells[selectedCell].innerHTML = index + 1;
-            cells[selectedCell].setAttribute('data-value', index + 1);
+    numbersInput.forEach((e) => {
+        e.addEventListener('click', (event) => {
+            cells[selectedCell].innerHTML = event.target.getAttribute('value');
+            cells[selectedCell].setAttribute('data-value', event.target.getAttribute('value'));
 
             //Filling sudoku questionnaire with the number input
             let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
             let col = selectedCell % 9;
-            su_answer[row][col] = index + 1;
+            su_answer[row][col] = event.target.getAttribute('value');
 
             //Save game
             saveGameInfo();
             
             //Removing error tags
             removeErrorIndex();
-            checkError(index + 1);
+            checkError(event.target.getAttribute('value'));
             
             cells[selectedCell].classList.add('zoom-in');
             setTimeout(() => {
@@ -457,6 +423,8 @@ const numberInputClick = () => {
                 removeGameInfo();
                 showResult();
             };
+
+            console.log(su_answer);
         })
     })
 }

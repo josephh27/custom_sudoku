@@ -230,6 +230,7 @@ nav {
     position: relative;
     height: var(--sudoku-cell-size);
     width: var(--sudoku-cell-size);
+    overflow: hidden;
     border-radius: var(--border-radius);
     background-color: var(--bg-main);
     display: grid;
@@ -296,31 +297,39 @@ nav {
 /* End of blinking sudoku extra feature */
 
 
-/*Extra styles for rotting sudoku*/
-.rotten::before {
+/*Extra styles for flooding sudoku*/
+.flooded {
+    animation: vanish 2s linear;
+}
+
+@keyframes vanish {
+    25% {opacity: 0.75;}
+    50% {opacity: 0.5;}
+    75% {opacity: 0.25;}
+    100% {opacity: 0;}
+}
+
+.flooded::before {
     content: '';
     display: block;
     position: absolute;
-    top: 49%;
-    left: -1%;
-    right: -1%;
-    height: 4px;
-    border-radius: 4px;
-    margin-top: -2px;
-    background: black;
-    transform: scale(0);
-    animation: 1s ease-in 0s expand;
-    z-index: 1;
+    background: #165bc9;
+    top: 110%;
+    right: -50%;
+    height: 200%;
+    width: 200%;
+    border-radius: 38%;
+    transform: rotate(360deg);
+    z-index: 1; 
+    animation: wave 2s linear infinite;
 }
 
-@keyframes expand{
-    25%{transform: scale(0.25);}
-    50%{transform: scale(0.5);}
-    75%{transform: scale(0.75);}
-    100%{transform: scale(1);}
+@keyframes wave{
+    100% {transform: rotate(720deg);}
+    100% {top: -5%;}
 }
 
-/* End of rotting sudoku extra feature */
+/* End of flooding sudoku extra feature */
 
 
 
@@ -492,6 +501,9 @@ nav {
 .zoom-in {
     animation: zoom-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
+
+
 
 @keyframes zoom-in {
     0% {

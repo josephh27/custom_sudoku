@@ -17,6 +17,7 @@ document.querySelector('.dark-mode-toggle').addEventListener('click', () => {
 
 //Initial values
 //Screens
+
 const startScreen = document.querySelector(".start-screen");
 const inGameScreen = document.querySelector(".in-game-screen");
 const pauseScreen = document.querySelector(".pause-screen");
@@ -80,8 +81,8 @@ const startGame = () => {
             seconds += 1;
             timeDisplay.innerHTML = showTime(seconds);
             saveGameInfo();
-            if (seconds%4 === 0){
-                rotCell();
+            if (seconds%10 === 0){
+                floodCell();
             }
         }
     }, 1000);
@@ -91,10 +92,9 @@ const randomInteger = () => {
     return Math.floor(Math.random() * (80 - 0 + 1)) + 0;
 }
 
-const rotCell = () => {
+const floodCell = () => {
     let randomIndex =  randomInteger();
-    cells[randomIndex].classList.add('rotten');
-    cells[randomIndex].innerHTML = '';
+    cells[randomIndex].classList.add('flooded');
     cells[randomIndex].classList.remove('filled');
     cells[randomIndex].classList.remove('selected');
     cells[randomIndex].classList.remove('err');
@@ -102,8 +102,9 @@ const rotCell = () => {
     let col = randomIndex % CONSTANT.GRID_SIZE;
     su_answer[row][col] = 0;
     setTimeout(() => {
-        cells[randomIndex].classList.remove('rotten')
-    }, 1000);
+        cells[randomIndex].innerHTML = '';
+        cells[randomIndex].classList.remove('flooded')
+    }, 2000);
 }
 
 

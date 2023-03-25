@@ -53,8 +53,8 @@
                         <h2 id="variety-title">Varieties</h2>
                         <div class="variety"><a href="index.html">Normal Sudoku</a></div>
                         <div class="variety"><a href="blinking_sudoku.html">Blinking Sudoku</a></div>
-                        <div class="variety current-game">Rotting Sudoku</div>
-                        <div class="variety"><a href="letter_sudoku.html">Letter Sudoku</a></div>
+                        <div class="variety"><a href="flooding_sudoku.html">Flooding Sudoku</a></div>
+                        <div class="variety current-game">Letter Sudoku</div>
                     </div>
                     <div class="leaderboard">
                         <h2 id="top-records">Top Records</h2>
@@ -168,15 +168,15 @@
                     </div>
                     
                     <div class="numbers">
-                        <div class="number">1</div>
-                        <div class="number">2</div>
-                        <div class="number">3</div>
-                        <div class="number">4</div>
-                        <div class="number">5</div>
-                        <div class="number">6</div>
-                        <div class="number">7</div>
-                        <div class="number">8</div>
-                        <div class="number">9</div>
+                        <div class="number" value="a">a</div>
+                        <div class="number" value="b">b</div>
+                        <div class="number" value="c">c</div>
+                        <div class="number" value="d">d</div>
+                        <div class="number" value="e">e</div>
+                        <div class="number" value="f">f</div>
+                        <div class="number" value="g">g</div>
+                        <div class="number" value="h">h</div>
+                        <div class="number" value="i">i</div>
                         <div id="delete-button">X</div>
                     </div>
                 </div>
@@ -204,9 +204,9 @@
     <!-- end of actual content excluding nav bar -->
     
     <script src="scripts/information.js"></script>
-    <script src="scripts/sudoku.js"></script>
+    <script type="module" src="scripts/letter_sudoku.js"></script>
     <script src="scripts/leaderboard.js"> </script>
-    <script src="scripts/rotting.js"></script>
+    <script type="module" src="scripts/letter.js"></script>
     
 </body>
 </html>

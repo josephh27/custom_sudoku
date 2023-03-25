@@ -60,7 +60,7 @@ const findEmptyPos = (grid, pos) => {
     return false;
 }
 
-const shuffleNumbers = (arr) =>{
+const shuffleLetters = (arr) =>{
     for (let i = 0; i < arr.length; i++){
         let randomIndex = Math.floor(Math.random() * arr.length);
         let origValue = arr[i];
@@ -85,13 +85,13 @@ const sudokuCreate = (grid) => {
     };
     if (!findEmptyPos(grid, emptyPos)) {return true}
     
-    let numberList = shuffleNumbers([...CONSTANT.NUMBERS]);
+    let letterList = shuffleLetters([...CONSTANT.LETTERS]);
     
     let row = emptyPos.row;
     let col = emptyPos.col;
-    numberList.forEach((num) => {
-        if (isSafe(grid, row, col, num)){
-            grid[row][col] = num;
+    letterList.forEach((letter) => {
+        if (isSafe(grid, row, col, letter)){
+            grid[row][col] = letter;
 
             if (isFullGrid(grid)){
                 return true;
@@ -160,7 +160,7 @@ const isValid = (grid, row, col) => {
     return true;
 }
 
-const sudokuCheck = (grid) => {
+export const sudokuCheck = (grid) => {
     for (let i = 0; i < CONSTANT.GRID_SIZE; i++){
         for (let j = 0; j < CONSTANT.GRID_SIZE; j++){
             if (grid[i][j] === 0 || (!isValid(grid, i, j))){
@@ -171,7 +171,7 @@ const sudokuCheck = (grid) => {
     return true;
 }
 
-const sudokuGen = (level) => {
+export const sudokuGen = (level) => {
     let gridLayout = newGrid(CONSTANT.GRID_SIZE);
     let sudoku = sudokuCreate(gridLayout);
     if (sudoku){
