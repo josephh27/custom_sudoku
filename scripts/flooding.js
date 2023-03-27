@@ -6,7 +6,7 @@
 - Continue game button always appears after reloading, continuing then selecting new game
 - Fixed the retainment of seconds when continuing game
 */
-
+import {addFloodLeaderboard, refreshLeaderboard} from './flooding_leaderboard.js'
 
 //Toggling between dark and light mode
 document.querySelector('.dark-mode-toggle').addEventListener('click', () => {
@@ -47,7 +47,7 @@ let su_answer = undefined;
 
 let selectedCell = -1;
 
-const getGameInfo = () => JSON.parse(localStorage.getItem('game'));
+const getGameInfo = () => JSON.parse(localStorage.getItem('floodingGame'));
 
 const addSpacing = () => {
     let index = 0;
@@ -60,26 +60,26 @@ const addSpacing = () => {
     }
 }
 
-const setPlayerName = (name) => localStorage.setItem('player_name', name);
-const getPlayerName = () => localStorage.getItem('player_name');
+const setPlayerName = (name) => localStorage.setItem('flooderName', name);
+const getPlayerName = () => localStorage.getItem('flooderName');
 
 const showTime = (seconds) => new Date(seconds * 1000).toISOString().slice(11, 19);
 
 const startGame = () => {
     startScreen.classList.remove('active');
     inGameScreen.classList.add('active');
-    let pastName = localStorage.getItem('player_name');
-    nameDisplay.innerHTML = pastName ? pastName : nameInput.value.trim();
+    let pastName = localStorage.getItem('flooderName');
+    nameDisplay.textContent = pastName ? pastName : nameInput.value.trim();
     setPlayerName(nameDisplay.textContent.trim());
 
-    levelDisplay.innerHTML = CONSTANT.MODE_NAMES[levelIndex];
+    levelDisplay.textContent = CONSTANT.MODE_NAMES[levelIndex];
     refreshLeaderboard();
     showTime(seconds);
 
     timer = setInterval(() => {
         if (!pause){
             seconds += 1;
-            timeDisplay.innerHTML = showTime(seconds);
+            timeDisplay.textContent = showTime(seconds);
             saveGameInfo();
             if (seconds%10 === 0){
                 floodCell();
@@ -102,7 +102,7 @@ const floodCell = () => {
     let col = randomIndex % CONSTANT.GRID_SIZE;
     su_answer[row][col] = 0;
     setTimeout(() => {
-        cells[randomIndex].innerHTML = '';
+        cells[randomIndex].textContent = '';
         cells[randomIndex].classList.remove('flooded')
     }, 2000);
 }
@@ -110,7 +110,7 @@ const floodCell = () => {
 
 const clearSudoku = () => {
     for (let i = 0; i < Math.pow(CONSTANT.GRID_SIZE, 2); i++){
-        cells[i].innerHTML = '';
+        cells[i].textContent = '';
         cells[i].classList.remove('filled');
         cells[i].classList.remove('selected');
         cells[i].classList.remove('err')
@@ -122,7 +122,7 @@ const returnStartScreen = () => {
     clearInterval(timer);
     pause = false;
     seconds = 0;
-    document.querySelector('#continue-game').style.display = localStorage.getItem('game') ? 'grid' : 'none'
+    document.querySelector('#continue-game').style.display = localStorage.getItem('floodingGame') ? 'grid' : 'none'
     startScreen.classList.add('active');
     inGameScreen.classList.remove('active');
     pauseScreen.classList.remove('active');
@@ -133,7 +133,7 @@ const returnStartScreen = () => {
 
 document.querySelector('#start-new-game').addEventListener('click', () => {
     if (nameInput.value.trim().length > 0){
-        localStorage.removeItem('player_name');
+        localStorage.removeItem('flooderName');
         initSudoku();
         startGame();
     } else {
@@ -153,11 +153,12 @@ document.querySelector('#continue-game').addEventListener('click', () => {
 document.querySelector('#mode-switch').addEventListener('click', (e) => {
     levelIndex = levelIndex + 1 > CONSTANT.MODE_NAMES.length - 1 ? 0 : levelIndex + 1;
     level = CONSTANT.MODES[levelIndex];
-    e.target.innerHTML = CONSTANT.MODE_NAMES[levelIndex];
+    document.querySelector(".mode").textContent = CONSTANT.MODE_NAMES[levelIndex];
 });
 
 document.querySelector("#pause-button").addEventListener('click', () => {
     pauseScreen.classList.add('active');
+    window.scrollTo(0, 0);
     pause = true;
 })
 
@@ -173,7 +174,7 @@ document.querySelectorAll('.another-new-game').forEach(e => {
 });
 
 document.querySelector('#delete-button').addEventListener('click', () => {
-    cells[selectedCell].innerHTML = '';
+    cells[selectedCell].textContent = '';
     cells[selectedCell].setAttribute('data-value', 0);
 
     let row = Math.floor(selectedCell/CONSTANT.GRID_SIZE);
@@ -206,7 +207,7 @@ const initSudoku = () => {
         
         if (su.question[row][col] !== 0){
             cells[i].classList.add('filled');
-            cells[i].innerHTML = su.question[row][col];
+            cells[i].textContent = su.question[row][col];
 
         }
     }
@@ -215,13 +216,13 @@ const initSudoku = () => {
 const loadSudoku = () =>{
     let game = getGameInfo();
 
-    levelDisplay.innerHTML = CONSTANT.MODE_NAMES[game.level];
+    levelDisplay.textContent = CONSTANT.MODE_NAMES[game.level];
 
     //Retrieval of past game information
     su = game.su;
     su_answer = su.answer;
     seconds = game.seconds;
-    timeDisplay.innerHTML = showTime(seconds);
+    timeDisplay.textContent = showTime(seconds);
     levelIndex = game.level;
 
     
@@ -229,7 +230,7 @@ const loadSudoku = () =>{
         let row = Math.floor(i / CONSTANT.GRID_SIZE);
         let col = i % CONSTANT.GRID_SIZE;
         cells[i].setAttribute('data-value', su.question[row][col]);
-        cells[i].innerHTML = su_answer[row][col] !== 0 ? su_answer[row][col] : '';
+        cells[i].textContent = su_answer[row][col] !== 0 ? su_answer[row][col] : '';
         
         if (su.question[row][col] !== 0){
             cells[i].classList.add('filled');
@@ -248,7 +249,7 @@ const saveGameInfo = () => {
             answer: su_answer
         }
     }
-    localStorage.setItem('game', JSON.stringify(game))
+    localStorage.setItem('floodingGame', JSON.stringify(game))
 }
 
 const removeBackground = () => {
@@ -370,7 +371,7 @@ const cellClick = () => {
                 let validKeys = [1, 2, 3, 4, 5, 6, 7, 8, 9];
                 let answer = parseInt(event.key)
                 if (validKeys.includes(answer)){
-                    cells[selectedCell].innerHTML = answer;
+                    cells[selectedCell].textContent = answer;
                     cells[selectedCell].setAttribute('data-value', answer);
 
                     //Filling sudoku questionnaire with the number input
@@ -403,7 +404,7 @@ const cellClick = () => {
 
 
 const removeGameInfo = () => {
-    localStorage.removeItem('game');
+    localStorage.removeItem('floodingGame');
     document.querySelector('#continue-game').style.display = 'none';
 }
 
@@ -413,16 +414,16 @@ const showResult = () => {
         "name": nameDisplay.textContent,
         "time": showTime(seconds).slice(3)
     }
-    addPlayerLeaderboard(newRecord);
+    addFloodLeaderboard(newRecord);
     refreshLeaderboard();
     resultScreen.classList.add('active');
-    resultTime.innerHTML = showTime(seconds);
+    resultTime.textContent = showTime(seconds);
 }
 
 const numberInputClick = () => {
     numbersInput.forEach((e, index) => {
         e.addEventListener('click', () => {
-            cells[selectedCell].innerHTML = index + 1;
+            cells[selectedCell].textContent = index + 1;
             cells[selectedCell].setAttribute('data-value', index + 1);
 
             //Filling sudoku questionnaire with the number input

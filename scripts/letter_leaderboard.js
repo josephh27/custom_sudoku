@@ -1,6 +1,7 @@
 const recordHolderContainer = document.querySelector("[record-holder-container]");
 const recordTemplate = document.querySelector("#leaderboard-template");
 
+
 let players = [
     {"name": "Kaido", "time": "01:36"},
     {"name": "Khan", "time": "01:56"},
@@ -8,10 +9,10 @@ let players = [
     {"name": "Takashi", "time": "01:06"}
 ];
 
-export const addPlayerLeaderboard = (newAdd) => {
-    players = localStorage.getItem('leaderboard') ? JSON.parse(localStorage.getItem('leaderboard')) : players;
+export const addLetterLeaderboard = (newAdd) => {
+    players = localStorage.getItem('letterLeaderboard') ? JSON.parse(localStorage.getItem('letterLeaderboard')) : players;
     players.push(newAdd);
-    localStorage.setItem('leaderboard', JSON.stringify(players));
+    localStorage.setItem('letterLeaderboard', JSON.stringify(players));
 } 
 
 
@@ -20,7 +21,7 @@ export const refreshLeaderboard = () => {
             recordHolderContainer.removeChild(recordHolderContainer.firstChild);
         }
 
-        let data = localStorage.getItem('leaderboard') ? JSON.parse(localStorage.getItem('leaderboard')): players
+        let data = localStorage.getItem('letterLeaderboard') ? JSON.parse(localStorage.getItem('letterLeaderboard')): players
         data = data.sort((a, b) => {
             if (a['time'] > b['time']) return 1;
             if (a['time'] < b['time']) return -1;
@@ -35,8 +36,7 @@ export const refreshLeaderboard = () => {
             recordHolderContainer.append(recordsTemplate);
             recordHolderContainer.append(timeTemplate);
         })
-
-        localStorage.setItem('leaderboard', JSON.stringify(data));
+        localStorage.setItem('letterLeaderboard', JSON.stringify(data));
     }
 
     

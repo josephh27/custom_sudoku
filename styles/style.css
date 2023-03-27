@@ -18,7 +18,7 @@
     --space-y: 20px;
 
     --gap: 5px;
-
+    --base: 0.6rem;
     --font-size: 1.8rem;
     --font-size-lg: 2rem;
     --font-size-xl: 3rem;
@@ -93,6 +93,7 @@ nav {
 }
 
 .nav-logo {
+    width: auto;
     font-size: var(--font-size-lg);
     color: var(--blue);
 }
@@ -121,7 +122,7 @@ nav {
 }
 
 .main {
-    /* height: 100vh; */
+    
     padding-top: var(--nav-size);
     display: grid;
     place-items: center;
@@ -169,17 +170,20 @@ nav {
 }
 
 .button {
+    position: relative;
     height: 80px;
     width: 280px;
     background-color: var(--bg-main);
     color: var(--color-txt);
     border-radius: var(--border-radius);
-    display: grid;
-    place-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: width 0.3s ease-in-out;
     font-size: var(--font-size-lg);
     cursor: pointer;
     overflow: hidden;
+    gap: 28px;
 }
 
 
@@ -187,6 +191,88 @@ nav {
     border-color: var(--red);
     animation: bounce 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
+.mode {
+    width: auto;
+}
+
+.chevron {
+    position: absolute;
+    width: calc(var(--base) * 3.5);
+    height: calc(var(--base) * 0.8);
+    opacity: 0;
+    transform: scale(0.3);
+}
+
+.left-arrow {
+    height: 100%;
+    width: 10%;
+    transform: rotate(90deg);
+    left: 45px;
+}
+
+.right-arrow {
+    height: 100%;
+    width: 10%;
+    transform: rotate(270deg) scaleX(-1);
+    right: 45px;
+}
+
+.chevron:first-child{
+    animation: move-chevron 3s ease-out 1s infinite;
+}
+
+.chevron:nth-child(2){
+    animation: move-chevron 3s ease-out 2s infinite;
+}
+
+.chevron:nth-child(3){
+    animation: move-chevron 3s ease-out infinite;
+}
+
+.chevron:before,
+.chevron:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    background: var(--blue);
+}
+
+.chevron:before {
+    left: 0;
+    transform: skewY(30deg);
+}
+
+.chevron:after {
+    right: 0;
+    width: 50%;
+    transform: skewY(-30deg);
+}
+
+@keyframes move-chevron {
+    25% {
+        opacity: 1;
+    }
+
+    33.3% {
+        opacity: 1;
+        transform: translateY(calc(var(--base) * 1.2));
+    }
+
+    66.6% {
+        opacity: 1;
+        transform: translateY(calc(var(--base) * 3.2));
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(calc(var(--base) * 4.8)) scale(0.5);
+    }
+}
+
+
 
 @keyframes bounce {
     0% {
