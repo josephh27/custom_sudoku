@@ -29,10 +29,13 @@ export const refreshLeaderboard = () => {
         })
         
         data.map(player => {
-            const recordsTemplate = recordTemplate.content.cloneNode(true).children[0];
-            const timeTemplate = recordTemplate.content.cloneNode(true).children[1];
+            const modeTemplate = recordTemplate.content.cloneNode(true).children[0];
+            const recordsTemplate = recordTemplate.content.cloneNode(true).children[1];
+            const timeTemplate = recordTemplate.content.cloneNode(true).children[2];
             recordsTemplate.textContent = player.name;
             timeTemplate.textContent = player.time;
+            modeTemplate.textContent = player.mode;
+            recordHolderContainer.append(modeTemplate);
             recordHolderContainer.append(recordsTemplate);
             recordHolderContainer.append(timeTemplate);
         })

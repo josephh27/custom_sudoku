@@ -2,10 +2,10 @@ const recordHolderContainer = document.querySelector("[record-holder-container]"
 const recordTemplate = document.querySelector("#leaderboard-template");
 
 let players = [
-    {"name": "Kaido", "time": "01:36"},
-    {"name": "Khan", "time": "01:56"},
-    {"name": "Shiden", "time": "02:36"},
-    {"name": "Takashi", "time": "01:06"}
+    {"name": "Kaido", "time": "01:36", "mode" : "(Easy)"},
+    {"name": "Khan", "time": "01:56", "mode" : "(Medium)"},
+    {"name": "Shiden", "time": "02:36", "mode" : "(Medium)"},
+    {"name": "Takashi", "time": "01:06", "mode" : "(Easy)"}
 ];
 
 export const addPlayerLeaderboard = (newAdd) => {
@@ -28,12 +28,16 @@ export const refreshLeaderboard = () => {
         })
         
         data.map(player => {
-            const recordsTemplate = recordTemplate.content.cloneNode(true).children[0];
-            const timeTemplate = recordTemplate.content.cloneNode(true).children[1];
+            const modeTemplate = recordTemplate.content.cloneNode(true).children[0];
+            const recordsTemplate = recordTemplate.content.cloneNode(true).children[1];
+            const timeTemplate = recordTemplate.content.cloneNode(true).children[2];
             recordsTemplate.textContent = player.name;
             timeTemplate.textContent = player.time;
+            modeTemplate.textContent = player.mode;
+            recordHolderContainer.append(modeTemplate);
             recordHolderContainer.append(recordsTemplate);
             recordHolderContainer.append(timeTemplate);
+            
         })
 
         localStorage.setItem('leaderboard', JSON.stringify(data));

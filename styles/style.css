@@ -73,7 +73,7 @@ ul {
 
 nav {
     max-width: 100%;
-    background-color: #131414;
+    background-color: var(--bg-body);
     color: var(--color-txt);
     position: fixed;
     top: 0;
@@ -454,7 +454,7 @@ nav {
 
 #record-holder-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     justify-content: center;
     text-align: center;
     gap: 0px;

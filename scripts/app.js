@@ -389,7 +389,8 @@ const showResult = () => {
     clearInterval(timer);
     let newRecord = {
         "name": nameDisplay.textContent,
-        "time": showTime(seconds).slice(3)
+        "time": showTime(seconds).slice(3),
+        "mode": "(" + levelDisplay.textContent + ")"
     }
     addPlayerLeaderboard(newRecord);
     refreshLeaderboard();
