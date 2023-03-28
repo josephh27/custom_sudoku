@@ -12,5 +12,5 @@ const CONSTANT = {
         'Insane',
         'Inhuman'
     ],
-    MODES: [2, 38, 47, 56, 1, 74]
+    MODES: [29, 38, 47, 56, 65, 74]
 }
