@@ -647,10 +647,18 @@ nav {
         justify-content: center;
         height: auto;
         min-height: 100%;
-        gap: 10px;
+        gap: 0px;
     }
 
     .sudoku-grid {
+        grid-row: 1;
+    }
+
+    .in-game-info {
+        grid-row: 2;
+    }
+
+    .numbers {
         grid-row: 1;
     }
 
