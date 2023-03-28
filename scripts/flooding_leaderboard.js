@@ -3,10 +3,10 @@ const recordTemplate = document.querySelector("#leaderboard-template");
 
 
 let players = [
-    {"name": "Kaido", "time": "01:36"},
-    {"name": "Khan", "time": "01:56"},
-    {"name": "Shiden", "time": "02:36"},
-    {"name": "Takashi", "time": "01:06"}
+    {"name": "Kaido", "time": "01:36", "mode" : "(Easy)"},
+    {"name": "Khan", "time": "01:56", "mode" : "(Medium)"},
+    {"name": "Shiden", "time": "02:36", "mode" : "(Medium)"},
+    {"name": "Takashi", "time": "01:06", "mode" : "(Easy)"}
 ];
 
 export const addFloodLeaderboard = (newAdd) => {
