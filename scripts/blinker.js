@@ -163,8 +163,14 @@ document.querySelector('#continue-game').addEventListener('click', () => {
     startGame();
 })
 
-document.querySelector('#mode-switch').addEventListener('click', (e) => {
+document.querySelector('.right-arrow').addEventListener('click', (e) => {
     levelIndex = levelIndex + 1 > CONSTANT.MODE_NAMES.length - 1 ? 0 : levelIndex + 1;
+    level = CONSTANT.MODES[levelIndex];
+    document.querySelector(".mode").textContent = CONSTANT.MODE_NAMES[levelIndex];
+});
+
+document.querySelector('.left-arrow').addEventListener('click', (e) => {
+    levelIndex = levelIndex - 1 < 0 ? CONSTANT.MODE_NAMES.length - 1: levelIndex - 1;
     level = CONSTANT.MODES[levelIndex];
     document.querySelector(".mode").textContent = CONSTANT.MODE_NAMES[levelIndex];
 });
